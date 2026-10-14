@@ -1,0 +1,9 @@
+# Web Framework
+Flask>=3.0.0
+
+# HTTP Requests & APIs
+requests>=2.31.0
+python-dotenv>=1.0.0
+
+# Database & Testing
+pytest>=8.0.0

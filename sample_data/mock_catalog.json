@@ -1,0 +1,26 @@
+[
+  {
+    "title": "Arance Rosse di Sicilia IGP - Tarocco Ippolito (Cassa 10kg)",
+    "sku": "RV-TAR-10KG",
+    "price": "29.90",
+    "inventory_kg": 1500,
+    "description": "Arance Tarocco Ippolito ad altissima pigmentazione di antociani, coltivate alle pendici dell'Etna.",
+    "batch_lot": "LOT-2026-ETNA-01"
+  },
+  {
+    "title": "Arance Tarocco Gallo Premium (Cassa 16kg)",
+    "sku": "RV-TAR-16KG",
+    "price": "44.90",
+    "inventory_kg": 2400,
+    "description": "Selezione calibro extra per spremute ed esportazione diretta.",
+    "batch_lot": "LOT-2026-ETNA-02"
+  },
+  {
+    "title": "Moro di Lentini Extra Pigmentato (Cassa 10kg)",
+    "sku": "RV-MORO-10KG",
+    "price": "31.50",
+    "inventory_kg": 800,
+    "description": "Cultivar Moro con colore rosso rubino scuro e spiccate proprietà antiossidanti.",
+    "batch_lot": "LOT-2026-ETNA-03"
+  }
+]

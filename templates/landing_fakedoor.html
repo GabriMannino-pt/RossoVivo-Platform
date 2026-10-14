@@ -1,0 +1,770 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ROSSO VIVO — Arance Rosse di Sicilia dell'Etna | Pre-Ordine 2026/2027</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-page: #fcfbf9;
+            --bg-card: #ffffff;
+            --text-primary: #1c1917;
+            --text-secondary: #57534e;
+            --text-muted: #857f79;
+            --brand-red: #9e1b27;
+            --brand-red-hover: #ba2330;
+            --brand-red-light: #fef2f2;
+            --brand-dark: #3f0e13;
+            --accent-green: #1d6e3f;
+            --border-soft: #eae7e1;
+            --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.04);
+            --shadow-md: 0 12px 32px rgba(63, 14, 19, 0.08);
+            --shadow-lg: 0 20px 48px rgba(0, 0, 0, 0.12);
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
+            background-color: var(--bg-page);
+            color: var(--text-primary);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Top Notification */
+        .top-bar {
+            background-color: var(--brand-dark);
+            color: #fce7e7;
+            font-size: 13px;
+            font-weight: 500;
+            text-align: center;
+            padding: 10px 16px;
+            letter-spacing: 0.3px;
+        }
+        .top-bar strong { color: #fca5a5; }
+
+        /* Navbar */
+        .navbar {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 22px 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .brand-logo-text {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: 28px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            color: var(--brand-red);
+            text-decoration: none;
+            display: block;
+        }
+        .brand-tag {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--text-muted);
+            font-weight: 600;
+            display: block;
+            margin-top: -2px;
+        }
+        .nav-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: #ecfdf5;
+            color: var(--accent-green);
+            padding: 7px 16px;
+            border-radius: 99px;
+            font-size: 12px;
+            font-weight: 700;
+            border: 1px solid #bbf7d0;
+        }
+
+        /* Hero */
+        .hero {
+            max-width: 1200px;
+            margin: 10px auto 60px;
+            padding: 0 24px;
+            display: grid;
+            grid-template-columns: 1.05fr 0.95fr;
+            gap: 48px;
+            align-items: center;
+        }
+        @media (max-width: 900px) {
+            .hero { grid-template-columns: 1fr; gap: 36px; text-align: center; }
+        }
+
+        .hero-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: #ecfdf5;
+            color: var(--accent-green);
+            border: 1px solid #a7f3d0;
+            padding: 6px 14px;
+            border-radius: 99px;
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+        .hero-title {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: 46px;
+            line-height: 1.18;
+            font-weight: 700;
+            color: var(--brand-dark);
+            margin-bottom: 20px;
+        }
+        .hero-title em {
+            font-style: italic;
+            color: var(--brand-red);
+        }
+        @media (max-width: 600px) { .hero-title { font-size: 34px; } }
+        .hero-lead {
+            font-size: 18px;
+            color: var(--text-secondary);
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+
+        .hero-proof-list {
+            list-style: none;
+            margin-bottom: 32px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        @media (max-width: 900px) {
+            .hero-proof-list { text-align: left; max-width: 500px; margin-left: auto; margin-right: auto; }
+        }
+        .hero-proof-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 15px;
+            color: var(--text-primary);
+            font-weight: 500;
+        }
+        .proof-icon {
+            width: 24px;
+            height: 24px;
+            background: #fef2f2;
+            color: var(--brand-red);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 13px;
+            font-weight: 800;
+            flex-shrink: 0;
+        }
+
+        .hero-image-wrapper {
+            position: relative;
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: var(--shadow-lg);
+            border: 1px solid var(--border-soft);
+        }
+        .hero-image-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.4s ease;
+        }
+        .hero-image-wrapper:hover img { transform: scale(1.02); }
+
+        .hero-floating-badge {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            background: rgba(255, 255, 255, 0.94);
+            backdrop-filter: blur(10px);
+            padding: 12px 18px;
+            border-radius: 14px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            border: 1px solid rgba(255,255,255,0.8);
+            text-align: left;
+        }
+        .badge-fresh-value {
+            font-size: 20px;
+            font-weight: 800;
+            color: var(--brand-red);
+            line-height: 1;
+        }
+        .badge-fresh-label {
+            font-size: 12px;
+            color: var(--text-secondary);
+            font-weight: 600;
+        }
+
+        /* Product Offer Card */
+        .section-offer {
+            max-width: 1200px;
+            margin: 0 auto 70px;
+            padding: 0 24px;
+        }
+        .section-header {
+            text-align: center;
+            max-width: 680px;
+            margin: 0 auto 40px;
+        }
+        .section-pretitle {
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 700;
+            color: var(--brand-red);
+            margin-bottom: 8px;
+        }
+        .section-title {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: 36px;
+            color: var(--brand-dark);
+            margin-bottom: 12px;
+        }
+        .section-desc {
+            font-size: 16px;
+            color: var(--text-secondary);
+        }
+
+        .offer-card-main {
+            background: var(--bg-card);
+            border: 1px solid var(--border-soft);
+            border-radius: 24px;
+            padding: 36px;
+            display: grid;
+            grid-template-columns: 1.15fr 1fr;
+            gap: 40px;
+            align-items: center;
+            box-shadow: var(--shadow-md);
+            position: relative;
+            overflow: hidden;
+        }
+        @media (max-width: 880px) {
+            .offer-card-main { grid-template-columns: 1fr; padding: 24px; }
+        }
+
+        .ribbon-bestseller {
+            position: absolute;
+            top: 24px;
+            right: -36px;
+            background: var(--brand-red);
+            color: white;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            padding: 6px 45px;
+            transform: rotate(45deg);
+            box-shadow: 0 2px 10px rgba(158, 27, 39, 0.4);
+        }
+
+        .product-photo-box {
+            border-radius: 18px;
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+        }
+        .product-photo-box img {
+            width: 100%;
+            height: auto;
+            display: block;
+            border-radius: 18px;
+        }
+
+        .product-spec {
+            display: inline-block;
+            color: var(--accent-green);
+            font-weight: 700;
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+        }
+        .product-name {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: 32px;
+            color: var(--brand-dark);
+            margin-bottom: 8px;
+        }
+
+        .price-container {
+            display: flex;
+            align-items: baseline;
+            gap: 14px;
+            margin-bottom: 20px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid var(--border-soft);
+        }
+        .price-special {
+            font-size: 44px;
+            font-weight: 800;
+            color: var(--brand-red);
+            line-height: 1;
+        }
+        .price-old {
+            font-size: 22px;
+            color: var(--text-muted);
+            text-decoration: line-through;
+            font-weight: 500;
+        }
+        .price-per-kg {
+            font-size: 14px;
+            color: var(--text-secondary);
+            font-weight: 600;
+            background: var(--brand-red-light);
+            padding: 4px 10px;
+            border-radius: 6px;
+        }
+
+        .offer-benefits-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-bottom: 28px;
+        }
+        @media (max-width: 500px) { .offer-benefits-grid { grid-template-columns: 1fr; } }
+        .benefit-item {
+            font-size: 14px;
+            color: var(--text-secondary);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .benefit-check {
+            color: var(--accent-green);
+            font-weight: bold;
+        }
+
+        .btn-cta-primary {
+            background-color: var(--brand-red);
+            color: #ffffff;
+            font-size: 18px;
+            font-weight: 700;
+            padding: 18px 28px;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            text-align: center;
+            text-decoration: none;
+            display: block;
+            transition: all 0.25s ease;
+            box-shadow: 0 4px 16px rgba(158, 27, 39, 0.35);
+        }
+        .btn-cta-primary:hover {
+            background-color: var(--brand-red-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(158, 27, 39, 0.45);
+        }
+        .cta-guarantee-note {
+            font-size: 12px;
+            color: var(--text-muted);
+            text-align: center;
+            margin-top: 12px;
+        }
+
+        /* 3 Columns Real Photos Showcase */
+        .section-story {
+            max-width: 1200px;
+            margin: 0 auto 70px;
+            padding: 0 24px;
+        }
+        .story-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+        @media (max-width: 900px) { .story-grid { grid-template-columns: 1fr; } }
+        .story-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-soft);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+            transition: transform 0.3s ease;
+        }
+        .story-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-md);
+        }
+        .story-img-wrap {
+            height: 250px;
+            overflow: hidden;
+        }
+        .story-img-wrap img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+        .story-content { padding: 24px; }
+        .story-content h3 {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: 22px;
+            color: var(--brand-dark);
+            margin-bottom: 10px;
+        }
+        .story-content p {
+            font-size: 14px;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        /* Modal */
+        .modal-backdrop {
+            display: none;
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(28, 25, 23, 0.75);
+            backdrop-filter: blur(6px);
+            z-index: 999;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        .modal-window {
+            background: #ffffff;
+            border-radius: 20px;
+            max-width: 500px;
+            width: 100%;
+            padding: 36px;
+            box-shadow: var(--shadow-lg);
+            position: relative;
+        }
+        .modal-close-btn {
+            position: absolute;
+            top: 18px; right: 20px;
+            background: none; border: none;
+            font-size: 26px; cursor: pointer;
+            color: var(--text-muted);
+        }
+        .modal-header h2 {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: 28px;
+            color: var(--brand-dark);
+            margin-bottom: 8px;
+        }
+        .modal-header p {
+            font-size: 14px;
+            color: var(--text-secondary);
+            margin-bottom: 22px;
+        }
+        .input-group { margin-bottom: 16px; text-align: left; }
+        .input-group label {
+            display: block;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 6px;
+        }
+        .input-group input {
+            width: 100%;
+            padding: 13px 16px;
+            border: 1.5px solid var(--border-soft);
+            border-radius: 10px;
+            font-size: 15px;
+            outline: none;
+        }
+        .input-group input:focus { border-color: var(--brand-red); }
+        .modal-recap-box {
+            background: var(--bg-page);
+            border: 1px dashed var(--border-soft);
+            border-radius: 10px;
+            padding: 14px;
+            margin-bottom: 18px;
+            font-size: 13px;
+            color: var(--text-secondary);
+        }
+        .modal-recap-box strong { color: var(--brand-red); }
+        .btn-submit-order {
+            width: 100%;
+            padding: 16px;
+            background: var(--brand-red);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+        }
+        .btn-submit-order:hover { background: var(--brand-red-hover); }
+
+        /* Footer */
+        footer {
+            background: var(--brand-dark);
+            color: #d6d3d1;
+            padding: 40px 24px;
+            text-align: center;
+            font-size: 13px;
+            margin-top: 60px;
+        }
+        footer p { margin-bottom: 8px; }
+    </style>
+</head>
+<body>
+
+    <div class="top-bar">
+        🌋 <strong>RACCOLTO ETNA 2026/27:</strong> Pre-ordini aperti con <strong>sconto 25%</strong> e spedizione 24-48h dalla Sicilia.
+    </div>
+
+    <header class="navbar">
+        <div>
+            <a href="#" class="brand-logo-text">ROSSO VIVO</a>
+            <span class="brand-tag">Piana di Catania • Sicilia</span>
+        </div>
+        <div class="nav-badge">
+            ✓ Filiera Diretta dall'Agrumeto
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-tag">
+                🌿 Staccate dall'Albero e Spedite in 24 Ore
+            </div>
+            <h1 class="hero-title">
+                Il sapore autentico che <em>non trovi</em> al supermercato.
+            </h1>
+            <p class="hero-lead">
+                Arance rosse Tarocco coltivate nel fertile territorio della Piana di Catania, ai piedi dell'Etna. Maturazione naturale al sole siciliano, raccolte fresche solo dopo il tuo ordine e consegnate a casa tua in 24-48 ore.
+            </p>
+
+            <ul class="hero-proof-list">
+                <li class="hero-proof-item">
+                    <div class="proof-icon">✓</div>
+                    <span><strong>Maturazione naturale sulla pianta:</strong> staccate al momento giusto senza forzature.</span>
+                </li>
+                <li class="hero-proof-item">
+                    <div class="proof-icon">✓</div>
+                    <span><strong>Rosso tipico dell'Etna:</strong> polpa screziata e ricca di sapore grazie all'escursione termica.</span>
+                </li>
+                <li class="hero-proof-item">
+                    <div class="proof-icon">✓</div>
+                    <span><strong>Freschezza con foglia verde:</strong> spedizione rapida dall'albero alla tua tavola.</span>
+                </li>
+            </ul>
+
+            <a href="#offerta" class="btn-cta-primary" style="max-width: 320px;">
+                Prenota la Cassetta 10 kg →
+            </a>
+        </div>
+
+        <div class="hero-image-wrapper">
+            <img src="/static/images/hero_tarocco.jpg" alt="Arance Rosse Tarocco con l'Etna sullo sfondo">
+            <div class="hero-floating-badge">
+                <div class="badge-fresh-value">100% Fresche</div>
+                <div>
+                    <div class="badge-fresh-label">Raccolta su Ordinazione</div>
+                    <div style="font-size: 10px; color: #857f79;">Filiera Corta Diretta</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Offer Section -->
+    <section class="section-offer" id="offerta">
+        <div class="section-header">
+            <div class="section-pretitle">Prevendita Stagione 2026/27</div>
+            <h2 class="section-title">La Cassetta da 10 kg — Best Seller</h2>
+            <p class="section-desc">
+                La scorta ideale per tutta la famiglia. Arance Tarocco con foglia fresca attaccata al ramo, ottime da tavola e ricche di succo per le tue spremute quotidiane.
+            </p>
+        </div>
+
+        <div class="offer-card-main">
+            <div class="ribbon-bestseller">-25% PRE-ORDINE</div>
+
+            <div class="product-photo-box">
+                <img src="/static/images/box_10kg.jpg" alt="Cassetta da 10kg Rosso Vivo con arance fresche con foglia">
+            </div>
+
+            <div class="product-info-details">
+                <div class="product-spec">Tarocco Siciliano • Calibro Scelto</div>
+                <h3 class="product-name">Cassetta 10 kg Rosso Vivo</h3>
+                
+                <div class="price-container">
+                    <div class="price-special">€29,90</div>
+                    <div class="price-old">€39,90</div>
+                    <div class="price-per-kg">Solo €2,99 / kg</div>
+                </div>
+
+                <div class="offer-benefits-grid">
+                    <div class="benefit-item">
+                        <span class="benefit-check">✓</span> Spedizione rapida 24/48h
+                    </div>
+                    <div class="benefit-item">
+                        <span class="benefit-check">✓</span> Cartone 100% riciclato kraft
+                    </div>
+                    <div class="benefit-item">
+                        <span class="benefit-check">✓</span> Consegna prima raccolta (Dicembre)
+                    </div>
+                    <div class="benefit-item">
+                        <span class="benefit-check">✓</span> Nessun anticipo immediato
+                    </div>
+                </div>
+
+                <button class="btn-cta-primary" onclick="openModal()">
+                    Blocca l'Offerta a €29,90 — Paga alla Spedizione
+                </button>
+                <div class="cta-guarantee-note">
+                    🔒 Prenotazione prioritaria per il primo lotto di raccolta. Nessun addebito oggi.
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3 Pillars Section -->
+    <section class="section-story">
+        <div class="section-header">
+            <div class="section-pretitle">La Nostra Terra & La Nostra Filosofia</div>
+            <h2 class="section-title">Perché Scegliere la Filiera Diretta</h2>
+            <p class="section-desc">
+                Nessun intermediario, nessun lungo passaggio nei mercati generali. Solo frutta colta e spedita con cura.
+            </p>
+        </div>
+
+        <div class="story-grid">
+            <div class="story-card">
+                <div class="story-img-wrap">
+                    <img src="/static/images/contadino_etna.jpg" alt="Contadino siciliano ai piedi dell'Etna">
+                </div>
+                <div class="story-content">
+                    <h3>Coltivate ai Piedi del Vulcano</h3>
+                    <p>
+                        Il microclima della Piana di Catania e l'escursione termica tra giorno e notte favoriscono la naturale pigmentazione e donano quel sapore intenso e caratteristico che rende celebre l'arancia rossa nel mondo.
+                    </p>
+                </div>
+            </div>
+
+            <div class="story-card">
+                <div class="story-img-wrap">
+                    <img src="/static/images/spremuta.jpg" alt="Spremuta fresca di arancia rossa Tarocco">
+                </div>
+                <div class="story-content">
+                    <h3>Succo Pieno e Gusto Genuino</h3>
+                    <p>
+                        Polpa succosa e consistente. Una spremuta dal colore vivo e dal profumo inconfondibile ogni mattina per fare il pieno di energia naturale per tutta la famiglia.
+                    </p>
+                </div>
+            </div>
+
+            <div class="story-card">
+                <div class="story-img-wrap">
+                    <img src="/static/images/hero_tarocco.jpg" alt="Arance colte fresche">
+                </div>
+                <div class="story-content">
+                    <h3>Dall'Albero a Casa Tua</h3>
+                    <p>
+                        Mentre le arance dei circuiti commerciali tradizionali affrontano molti passaggi prima di arrivare sui banchi, le nostre vengono confezionate in campagna e spedite direttamente a casa tua.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Modal Pre-ordine -->
+    <div class="modal-backdrop" id="preorderModal">
+        <div class="modal-window">
+            <button class="modal-close-btn" onclick="closeModal()">&times;</button>
+
+            <div id="form-view">
+                <div class="modal-header">
+                    <h2>Blocca il Tuo Pre-Ordine</h2>
+                    <p>Prenota la Cassetta da 10 kg con sconto del 25%. Ti avviseremo appena inizierà lo stacco in agrumeto.</p>
+                </div>
+
+                <form id="preorderForm" onsubmit="submitForm(event)">
+                    <div class="modal-recap-box">
+                        📦 <strong>Riepilogo:</strong> 1x Cassetta 10 kg Tarocco a <strong>€29,90</strong> (invece di €39,90) • Consegna: Dicembre 2026
+                    </div>
+
+                    <div class="input-group">
+                        <label for="email">Il tuo Indirizzo Email *</label>
+                        <input type="email" id="email" required placeholder="nome@esempio.it">
+                    </div>
+
+                    <div class="input-group">
+                        <label for="cap">Il tuo CAP o Città di spedizione *</label>
+                        <input type="text" id="cap" required placeholder="Es. 95047 Paternò o 20121 Milano">
+                    </div>
+
+                    <button type="submit" class="btn-submit-order">
+                        Conferma Prenotazione (Senza Anticipo)
+                    </button>
+                    <p style="font-size: 11px; color: var(--text-muted); text-align: center; margin-top: 10px;">
+                        Nessun addebito oggi. Ti ricontatteremo via email prima della spedizione per confermare i dettagli.
+                    </p>
+                </form>
+            </div>
+
+            <div id="confirmation-view" style="display: none; text-align: center; padding: 20px 0;">
+                <div style="width: 60px; height: 60px; background: #ecfdf5; color: #1d6e3f; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 30px; margin: 0 auto 16px;">✓</div>
+                <h2 style="font-family: 'Playfair Display', Georgia, serif; color: var(--brand-dark); margin-bottom: 10px;">Prenotazione Confermata!</h2>
+                <p style="color: var(--text-secondary); font-size: 15px; margin-bottom: 24px;">
+                    Abbiamo riservato la tua Cassetta da 10 kg a €29,90. Riceverai gli aggiornamenti fotografici sulla maturazione direttamente alla tua email.
+                </p>
+                <button class="btn-submit-order" onclick="closeModal()">
+                    Torna al Sito
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div style="font-family: 'Playfair Display', Georgia, serif; font-size: 20px; font-weight: 700; color: white; margin-bottom: 8px;">
+            ROSSO VIVO — ARANCE ROSSE DI SICILIA
+        </div>
+        <p>Piana di Catania (CT) • Zona Etna • Sicilia, Italia</p>
+        <p style="color: #a8a29e; font-size: 12px;">
+            © 2026 Rosso Vivo. Tutti i diritti riservati.
+        </p>
+    </footer>
+
+    <script>
+        function openModal() {
+            document.getElementById('preorderModal').style.display = 'flex';
+            document.getElementById('form-view').style.display = 'block';
+            document.getElementById('confirmation-view').style.display = 'none';
+        }
+        function closeModal() {
+            document.getElementById('preorderModal').style.display = 'none';
+        }
+        window.onclick = function(e) {
+            if (e.target === document.getElementById('preorderModal')) closeModal();
+        };
+        async function submitForm(e) {
+            e.preventDefault();
+            const email = document.getElementById('email').value;
+            const cap = document.getElementById('cap').value;
+            try {
+                const res = await fetch('/api/submit_lead', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email: email, lead_source: 'FakeDoor Preordine 10kg - CAP ' + cap })
+                });
+                const data = await res.json();
+                if (data.success) {
+                    document.getElementById('form-view').style.display = 'none';
+                    document.getElementById('confirmation-view').style.display = 'block';
+                } else {
+                    alert(data.message || 'Errore');
+                }
+            } catch(err) {
+                document.getElementById('form-view').style.display = 'none';
+                document.getElementById('confirmation-view').style.display = 'block';
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rosso Vivo — Command Center (Shopify & Pre-Lancio Integrati)</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        :root {
+            --bg-dark: #0f1117;
+            --card-bg: #1a1d26;
+            --border-color: #2a2e3d;
+            --accent-red: #c0392b;
+            --accent-red-hover: #e74c3c;
+            --accent-green: #27ae60;
+            --accent-green-hover: #2ecc71;
+            --accent-gold: #f39c12;
+            --text-main: #ecf0f1;
+            --text-muted: #8a8f9d;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            padding: 24px;
+            line-height: 1.5;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 20px;
+            border-bottom: 1px solid var(--border-color);
+            margin-bottom: 24px;
+        }
+
+        .brand-title {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .brand-badge {
+            width: 16px;
+            height: 16px;
+            background-color: var(--accent-red);
+            border-radius: 50%;
+            box-shadow: 0 0 12px var(--accent-red);
+        }
+
+        h1 {
+            font-size: 24px;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+        }
+
+        .status-pill {
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 600;
+            background: rgba(39, 174, 96, 0.15);
+            color: var(--accent-green);
+            border: 1px solid var(--accent-green);
+        }
+
+        /* STRATEGY PROPOSAL SECTION */
+        .proposal-banner {
+            background: linear-gradient(135deg, rgba(192, 57, 43, 0.15), rgba(26, 29, 38, 0.9));
+            border: 1px solid var(--accent-red);
+            border-radius: 12px;
+            padding: 20px 24px;
+            margin-bottom: 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .proposal-info h3 {
+            font-size: 16px;
+            color: var(--accent-red);
+            margin-bottom: 4px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .proposal-info p {
+            font-size: 14px;
+            color: var(--text-main);
+        }
+
+        .proposal-actions {
+            display: flex;
+            gap: 12px;
+        }
+
+        .btn-approve {
+            background: var(--accent-green);
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 13px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .btn-approve:hover {
+            background: var(--accent-green-hover);
+        }
+
+        .btn-reject {
+            background: transparent;
+            color: var(--text-muted);
+            border: 1px solid var(--border-color);
+            padding: 10px 18px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 13px;
+            cursor: pointer;
+        }
+
+        /* PRE-LAUNCH WIDGET */
+        .prelaunch-panel {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 24px;
+        }
+
+        .progress-bar-bg {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+            height: 10px;
+            overflow: hidden;
+            margin-top: 6px;
+            margin-bottom: 14px;
+        }
+
+        .progress-fill {
+            background: var(--accent-red);
+            height: 100%;
+            width: 0%;
+            transition: width 0.5s ease-in-out;
+        }
+
+        .progress-fill-green {
+            background: var(--accent-green);
+            height: 100%;
+            width: 0%;
+            transition: width 0.5s ease-in-out;
+        }
+
+        /* KPI Cards Grid */
+        .kpi-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 16px;
+            margin-bottom: 28px;
+        }
+
+        .kpi-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 20px;
+            transition: transform 0.2s, border-color 0.2s;
+        }
+
+        .kpi-card:hover {
+            transform: translateY(-2px);
+            border-color: var(--accent-red);
+        }
+
+        .kpi-label {
+            font-size: 12px;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 8px;
+        }
+
+        .kpi-value {
+            font-size: 26px;
+            font-weight: 700;
+            color: #ffffff;
+        }
+
+        .kpi-sub {
+            font-size: 12px;
+            color: var(--text-muted);
+            margin-top: 4px;
+        }
+
+        /* Dashboard Grid Layout */
+        .dashboard-main {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 24px;
+            margin-bottom: 28px;
+        }
+
+        .card-panel {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 24px;
+        }
+
+        .panel-title {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        /* Bandi & Fisco Section */
+        .fiscal-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 16px;
+            margin-top: 16px;
+        }
+
+        .fiscal-card {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 16px;
+        }
+
+        .fiscal-card h4 {
+            font-size: 14px;
+            color: var(--accent-gold);
+            margin-bottom: 8px;
+        }
+
+        /* Simulator Controls */
+        .sim-slider {
+            margin-bottom: 16px;
+        }
+
+        .sim-slider label {
+            display: flex;
+            justify-content: space-between;
+            font-size: 13px;
+            color: var(--text-muted);
+            margin-bottom: 6px;
+        }
+
+        .sim-slider input {
+            width: 100%;
+            accent-color: var(--accent-red);
+        }
+
+        .sim-result {
+            background: rgba(192, 57, 43, 0.1);
+            border: 1px solid var(--accent-red);
+            border-radius: 8px;
+            padding: 16px;
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        /* Tables */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13px;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        th {
+            color: var(--text-muted);
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 11px;
+        }
+
+        tr:hover {
+            background-color: rgba(255, 255, 255, 0.02);
+        }
+
+        .btn-action {
+            background: var(--accent-red);
+            color: white;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 11px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .btn-action:hover {
+            background: var(--accent-red-hover);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <div class="brand-title">
+            <div class="brand-badge"></div>
+            <h1>Rosso Vivo <span style="font-weight:300; color:var(--text-muted)">Command Center (Shopify & Pre-Lancio Integrati)</span></h1>
+        </div>
+        <div>
+            <span class="status-pill" id="sys-status">🟢 SISTEMA OPERATIVO</span>
+        </div>
+    </div>
+
+    <!-- STRATEGY PROPOSAL BANNER (AGENTE 15 SUPERVISOR) -->
+    <div class="proposal-banner" id="proposal-banner">
+        <div class="proposal-info">
+            <h3>⚡ PROPOSTA STRATEGICA PROATTIVA (Agente 15 Supervisor)</h3>
+            <p id="proposal-text">Caricamento proposta in corso...</p>
+        </div>
+        <div class="proposal-actions" id="proposal-actions">
+            <button class="btn-approve" onclick="decideProposal('APPROVA')">APPROVA</button>
+            <button class="btn-reject" onclick="decideProposal('RIFIUTA')">RIFIUTA</button>
+        </div>
+    </div>
+
+    <!-- WIDGET PRE-LANCIO AGOSTO-DICEMBRE 2026 -->
+    <div class="prelaunch-panel">
+        <div class="panel-title">
+            <span>🚀 STAGIONE PRE-LANCIO (AGOSTO ➔ DICEMBRE 2026)</span>
+            <span style="font-size:12px; color:var(--text-muted)">Raccolta Prima Spedizione: 15 Dicembre</span>
+        </div>
+        <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px;">
+            <div>
+                <div style="display:flex; justify-content:space-between; font-size:13px;">
+                    <span>Email Leads Raccolte</span>
+                    <strong id="prelaunch-leads-txt">0 / 2.000</strong>
+                </div>
+                <div class="progress-bar-bg"><div class="progress-fill" id="leads-bar"></div></div>
+            </div>
+            <div>
+                <div style="display:flex; justify-content:space-between; font-size:13px;">
+                    <span>Pre-Ordini Confermati</span>
+                    <strong id="prelaunch-orders-txt">0 / 300</strong>
+                </div>
+                <div class="progress-bar-bg"><div class="progress-fill-green" id="orders-bar"></div></div>
+            </div>
+            <div>
+                <div style="display:flex; justify-content:space-between; font-size:13px;">
+                    <span>Profitto Netto Pre-Lancio Stimato</span>
+                    <strong style="color:var(--accent-green)" id="prelaunch-profit-txt">€4,480.00</strong>
+                </div>
+                <div style="font-size:11px; color:var(--text-muted); margin-top:4px;">Fatturato Pre-Ordini: <span id="prelaunch-rev-txt">€0.00</span></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- KPI CARDS -->
+    <div class="kpi-grid">
+        <div class="kpi-card">
+            <div class="kpi-label">Fatturato vs Target</div>
+            <div class="kpi-value" id="kpi-revenue">€0.00</div>
+            <div class="kpi-sub">Target Anno 1: €200.000</div>
+        </div>
+        <div class="kpi-card">
+            <div class="kpi-label">Profitto Netto</div>
+            <div class="kpi-value" id="kpi-profit" style="color:var(--accent-green)">€0.00</div>
+            <div class="kpi-sub">Margine Lordo target: 41%</div>
+        </div>
+        <div class="kpi-card">
+            <div class="kpi-label">Ordini Totali</div>
+            <div class="kpi-value" id="kpi-orders">0</div>
+            <div class="kpi-sub">Break-even: 1.770 ordini</div>
+        </div>
+        <div class="kpi-card">
+            <div class="kpi-label">AOV (Ordine Medio)</div>
+            <div class="kpi-value" id="kpi-aov">€0.00</div>
+            <div class="kpi-sub">Target: €46.00</div>
+        </div>
+        <div class="kpi-card">
+            <div class="kpi-label">CAC (Costo Acquisizione)</div>
+            <div class="kpi-value" id="kpi-cac">€0.00</div>
+            <div class="kpi-sub">Target: &lt;€12.00</div>
+        </div>
+        <div class="kpi-card">
+            <div class="kpi-label">Stock Magazzino</div>
+            <div class="kpi-value" id="kpi-stock">0 kg</div>
+            <div class="kpi-sub">Soglia riordino: 500 kg</div>
+        </div>
+    </div>
+
+    <!-- DASHBOARD MAIN -->
+    <div class="dashboard-main">
+        <div class="card-panel">
+            <div class="panel-title">Proiezione Financial Performance (Fatturato vs Profitto)</div>
+            <canvas id="financeChart" height="120"></canvas>
+        </div>
+
+        <div class="card-panel">
+            <div class="panel-title">Simulatore Scenari Growth</div>
+            <div class="sim-slider">
+                <label>Prezzo Medio Cassetta 10kg (€) <span id="val-price">39.90</span></label>
+                <input type="range" id="input-price" min="30" max="50" step="0.5" value="39.90" oninput="updateSim()">
+            </div>
+            <div class="sim-slider">
+                <label>Ordini / Mese Stimati <span id="val-orders">300</span></label>
+                <input type="range" id="input-orders" min="100" max="1000" step="10" value="300" oninput="updateSim()">
+            </div>
+            <div class="sim-slider">
+                <label>CAC stimato (€) <span id="val-cac">12.00</span></label>
+                <input type="range" id="input-cac" min="5" max="25" step="0.5" value="12.0" oninput="updateSim()">
+            </div>
+
+            <div class="sim-result">
+                <div style="font-size:12px; color:var(--text-muted)">PROFITTO NETTO STIMATO STAGIONE</div>
+                <div style="font-size:24px; font-weight:700; color:var(--accent-green)" id="sim-profit-output">€14,850.00</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- WIDGET BANDI & FISCALITÀ (AGENTI 16 & 17) -->
+    <div class="card-panel" style="margin-bottom: 28px;">
+        <div class="panel-title">
+            <span>🏛️ BANDI DI FINANZIAMENTO & SIMULAZIONI FISCALI (Agenti 16 & 17 — Gemini €0/mo)</span>
+            <span style="font-size:12px; color:var(--text-gold)">Monitoraggio 30 Fonti & 3 Scenari Fiscali</span>
+        </div>
+
+        <div class="fiscal-grid">
+            <!-- BANDI ATTIVI WIDGET -->
+            <div class="fiscal-card">
+                <h4>📌 Bandi Attivi Idonei (Agente 16)</h4>
+                <div id="bandi-container" style="font-size:12px; color:var(--text-muted)">Caricamento bandi...</div>
+            </div>
+
+            <!-- SCADENZE FISCALI WIDGET -->
+            <div class="fiscal-card">
+                <h4>📅 Prossime Scadenze Fiscali (Agente 17)</h4>
+                <div id="scadenze-container" style="font-size:12px; color:var(--text-muted)">Caricamento scadenze...</div>
+            </div>
+
+            <!-- SIMULATORE FISCALE WIDGET -->
+            <div class="fiscal-card">
+                <h4>📊 Confronto Simulazioni Fiscali (Agente 17)</h4>
+                <div id="proiezioni-container" style="font-size:12px; color:var(--text-muted)">Caricamento simulazioni...</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- AGENT STATUS TABLE (17 AGENTI) -->
+    <div class="card-panel" style="margin-bottom: 28px;">
+        <div class="panel-title">
+            <span>Stato e Controllo Agenti AI (17 Agenti AI + Self-Audit Active)</span>
+            <span style="font-size:12px; color:var(--text-muted)">Shopify Admin API & Webhook Active</span>
+        </div>
+        <table>
+            <thead>
+                <tr>
+                    <th>Agente</th>
+                    <th>Frequenza</th>
+                    <th>Stato</th>
+                    <th>Ultima Azione</th>
+                    <th>Ultima Esecuzione</th>
+                    <th>Azione Manuale</th>
+                </tr>
+            </thead>
+            <tbody id="agent-table-body"></tbody>
+        </table>
+    </div>
+
+    <script>
+        let activeProposalId = null;
+
+        async function fetchKPIs() {
+            try {
+                const res = await fetch('/api/kpis');
+                const data = await res.json();
+                document.getElementById('kpi-revenue').innerText = '€' + data.total_revenue.toFixed(2);
+                document.getElementById('kpi-profit').innerText = '€' + data.total_profit.toFixed(2);
+                document.getElementById('kpi-orders').innerText = data.total_orders;
+                document.getElementById('kpi-aov').innerText = '€' + data.aov.toFixed(2);
+                document.getElementById('kpi-cac').innerText = '€' + data.cac.toFixed(2);
+                document.getElementById('kpi-stock').innerText = data.total_stock_kg + ' kg';
+                document.getElementById('sys-status').innerText = '🟢 SISTEMA ' + data.system_status;
+            } catch (err) { console.error(err); }
+        }
+
+        async function fetchPrelaunch() {
+            try {
+                const res = await fetch('/api/prelaunch');
+                const data = await res.json();
+                document.getElementById('prelaunch-leads-txt').innerText = `${data.total_leads} / ${data.target_leads}`;
+                document.getElementById('leads-bar').style.width = `${Math.min(data.leads_pct, 100)}%`;
+
+                document.getElementById('prelaunch-orders-txt').innerText = `${data.total_preorders} / ${data.target_preorders}`;
+                document.getElementById('orders-bar').style.width = `${Math.min(data.preorders_pct, 100)}%`;
+
+                document.getElementById('prelaunch-rev-txt').innerText = '€' + data.preorder_revenue.toFixed(2);
+                document.getElementById('prelaunch-profit-txt').innerText = '€' + data.est_net_profit.toFixed(2);
+            } catch (err) { console.error(err); }
+        }
+
+        async function fetchBandi() {
+            try {
+                const res = await fetch('/api/bandi');
+                const data = await res.json();
+                const container = document.getElementById('bandi-container');
+                if (data.length === 0) {
+                    container.innerHTML = '<p>Nessun bando idoneo attivo al momento.</p>';
+                    return;
+                }
+                let html = '<ul style="list-style:none; padding:0;">';
+                data.forEach(b => {
+                    html += `<li style="margin-bottom:8px;">
+                        <strong style="color:var(--text-main)">${b.titolo}</strong><br>
+                        <span>Fonte: ${b.fonte} | Max €${b.importo_max.toLocaleString()}</span><br>
+                        <span style="color:var(--accent-red)">Scadenza: ${b.scadenza}</span>
+                    </li>`;
+                });
+                html += '</ul>';
+                container.innerHTML = html;
+            } catch (err) { console.error(err); }
+        }
+
+        async function fetchScadenze() {
+            try {
+                const res = await fetch('/api/scadenze_fiscali');
+                const data = await res.json();
+                const container = document.getElementById('scadenze-container');
+                if (data.length === 0) {
+                    container.innerHTML = '<p>Nessuna scadenza fiscale registrata.</p>';
+                    return;
+                }
+                let html = '<ul style="list-style:none; padding:0;">';
+                data.slice(0, 3).forEach(s => {
+                    html += `<li style="margin-bottom:8px;">
+                        <strong style="color:var(--text-main)">${s.descrizione}</strong><br>
+                        <span>Scadenza: ${s.data_scadenza}</span> | <span style="color:var(--accent-green)">Previsto: €${s.importo_previsto}</span>
+                    </li>`;
+                });
+                html += '</ul>';
+                container.innerHTML = html;
+            } catch (err) { console.error(err); }
+        }
+
+        async function fetchProiezioniFiscali() {
+            try {
+                const res = await fetch('/api/proiezioni_fiscali');
+                const data = await res.json();
+                const container = document.getElementById('proiezioni-container');
+                if (data.length === 0) {
+                    container.innerHTML = '<p>Esegui Agente 17 per calcolare le simulazioni.</p>';
+                    return;
+                }
+                let html = '<ul style="list-style:none; padding:0;">';
+                data.forEach(p => {
+                    html += `<li style="margin-bottom:8px;">
+                        <strong style="color:var(--text-main)">Scenario ${p.scenario}</strong>: Netto €${p.netto.toLocaleString('it-IT', {minimumFractionDigits:2})}<br>
+                        <span style="font-size:11px; color:var(--text-muted)">Imposte Stimate: €${p.imposta_totale.toLocaleString('it-IT', {minimumFractionDigits:2})}</span>
+                    </li>`;
+                });
+                html += '</ul>';
+                container.innerHTML = html;
+            } catch (err) { console.error(err); }
+        }
+
+        async function fetchProposals() {
+            try {
+                const res = await fetch('/api/proposals');
+                const proposals = await res.json();
+                if (proposals.length > 0) {
+                    const top = proposals[0];
+                    activeProposalId = top.id;
+                    const statusStr = top.decided_by ? ` (Esito: ${top.decided_by})` : '';
+                    document.getElementById('proposal-text').innerText = `${top.decision} — Impatto: ${top.expected_outcome}${statusStr}`;
+                } else {
+                    document.getElementById('proposal-text').innerText = "Nessuna proposta attiva. I sistemi funzionano regolarmente.";
+                }
+            } catch (err) { console.error(err); }
+        }
+
+        async function decideProposal(action) {
+            if (!activeProposalId) return;
+            try {
+                const res = await fetch('/api/decide_proposal', {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({ id: activeProposalId, action: action })
+                });
+                const data = await res.json();
+                alert(data.message);
+                fetchProposals();
+                fetchKPIs();
+            } catch (err) { alert("Errore invio decisione"); }
+        }
+
+        async function fetchAgents() {
+            try {
+                const res = await fetch('/api/agents');
+                const agents = await res.json();
+                const tbody = document.getElementById('agent-table-body');
+                tbody.innerHTML = '';
+
+                agents.forEach(agent => {
+                    const tr = document.createElement('tr');
+                    const isSuccess = agent.status === 'SUCCESS';
+                    const statusBadge = isSuccess ? '🟢 OK' : (agent.status === 'PENDING' ? '⚪ IN ATTESA' : '🔴 ALERT');
+
+                    tr.innerHTML = `
+                        <td><strong>Agente ${agent.id}</strong> — ${agent.name}</td>
+                        <td>${agent.cycle}</td>
+                        <td>${statusBadge}</td>
+                        <td>${agent.last_action}</td>
+                        <td>${agent.last_run}</td>
+                        <td>
+                            <button class="btn-action" onclick="runAgent('${agent.id}')">Esegui Ora</button>
+                        </td>
+                    `;
+                    tbody.appendChild(tr);
+                });
+            } catch (err) { console.error(err); }
+        }
+
+        async function runAgent(agentId) {
+            try {
+                const res = await fetch(`/api/run_agent/${agentId}`, { method: 'POST' });
+                const data = await res.json();
+                alert(data.message);
+                fetchAgents();
+                fetchKPIs();
+                fetchProposals();
+                fetchPrelaunch();
+                fetchBandi();
+                fetchScadenze();
+                fetchProiezioniFiscali();
+            } catch (err) { alert("Errore esecuzione agente"); }
+        }
+
+        function updateSim() {
+            const price = parseFloat(document.getElementById('input-price').value);
+            const orders = parseInt(document.getElementById('input-orders').value);
+            const cac = parseFloat(document.getElementById('input-cac').value);
+
+            document.getElementById('val-price').innerText = price.toFixed(2);
+            document.getElementById('val-orders').innerText = orders;
+            document.getElementById('val-cac').innerText = cac.toFixed(1);
+
+            const cost_per_order = 27.30 + cac;
+            const profit_per_order = price - cost_per_order;
+            const total_seasonal_profit = profit_per_order * orders * 6;
+
+            document.getElementById('sim-profit-output').innerText = '€' + total_seasonal_profit.toLocaleString('it-IT', { minimumFractionDigits: 2 });
+        }
+
+        const ctx = document.getElementById('financeChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: ['Dic', 'Gen', 'Feb', 'Mar', 'Apr', 'Mag'],
+                datasets: [
+                    {
+                        label: 'Fatturato Proiettato (€)',
+                        data: [15000, 35000, 55000, 48000, 32000, 15000],
+                        borderColor: '#c0392b',
+                        backgroundColor: 'rgba(192, 57, 43, 0.1)',
+                        fill: true,
+                        tension: 0.4
+                    },
+                    {
+                        label: 'Profitto Netto Proiettato (€)',
+                        data: [6150, 14350, 22550, 19680, 13120, 6150],
+                        borderColor: '#27ae60',
+                        borderDash: [5, 5],
+                        fill: false
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                plugins: { legend: { labels: { color: '#ecf0f1' } } },
+                scales: {
+                    x: { ticks: { color: '#8a8f9d' }, grid: { color: '#2a2e3d' } },
+                    y: { ticks: { color: '#8a8f9d' }, grid: { color: '#2a2e3d' } }
+                }
+            }
+        });
+
+        fetchKPIs();
+        fetchPrelaunch();
+        fetchProposals();
+        fetchAgents();
+        fetchBandi();
+        fetchScadenze();
+        fetchProiezioniFiscali();
+    </script>
+</body>
+</html>

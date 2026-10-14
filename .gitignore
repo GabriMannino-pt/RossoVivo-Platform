@@ -1,0 +1,33 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+.venv/
+
+# Environment and sensitive keys
+.env
+.env.*
+*.key
+*.pem
+
+# Database & SQLite files (Never commit real client orders or purchase histories)
+*.db
+*.db-journal
+*.sqlite
+*.sqlite3
+rosso_vivo.db
+
+# Sensitive Documents & Media
+*.pdf
+*.docx
+*.xlsx
+*.csv
+fatture acquisti/
+documenti_fiscali/
+Acquirenti/
+Piano_Concimazione/
+Immagini_Produzione/

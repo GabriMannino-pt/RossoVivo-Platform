@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rosso Vivo — Arance Rosse di Sicilia dell'Etna | Guida & Anteprima Stagione</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-page: #fcfbf9;
+            --bg-card: #ffffff;
+            --text-primary: #1c1917;
+            --text-secondary: #57534e;
+            --text-muted: #857f79;
+            --brand-red: #9e1b27;
+            --brand-red-hover: #ba2330;
+            --brand-red-light: #fef2f2;
+            --brand-dark: #3f0e13;
+            --accent-green: #1d6e3f;
+            --border-soft: #eae7e1;
+            --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.04);
+            --shadow-md: 0 12px 32px rgba(63, 14, 19, 0.08);
+            --shadow-lg: 0 20px 48px rgba(0, 0, 0, 0.12);
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
+            background-color: var(--bg-page);
+            color: var(--text-primary);
+            line-height: 1.6;
+        }
+
+        .top-bar {
+            background-color: var(--brand-dark);
+            color: #fce7e7;
+            font-size: 13px;
+            font-weight: 500;
+            text-align: center;
+            padding: 10px 16px;
+        }
+        .top-bar strong { color: #fca5a5; }
+
+        .navbar {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 22px 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .brand-logo-text {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: 28px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            color: var(--brand-red);
+            text-decoration: none;
+        }
+        .brand-tag {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--text-muted);
+            font-weight: 600;
+            display: block;
+            margin-top: -2px;
+        }
+
+        .hero {
+            max-width: 1200px;
+            margin: 10px auto 50px;
+            padding: 0 24px;
+            display: grid;
+            grid-template-columns: 1.1fr 0.9fr;
+            gap: 48px;
+            align-items: center;
+        }
+        @media (max-width: 900px) {
+            .hero { grid-template-columns: 1fr; text-align: center; }
+        }
+
+        .badge-igp {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: #ecfdf5;
+            color: var(--accent-green);
+            padding: 6px 14px;
+            border-radius: 99px;
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 18px;
+            border: 1px solid #bbf7d0;
+        }
+        .hero-title {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: 46px;
+            line-height: 1.18;
+            font-weight: 700;
+            color: var(--brand-dark);
+            margin-bottom: 20px;
+        }
+        .hero-title em { color: var(--brand-red); font-style: italic; }
+        .hero-lead {
+            font-size: 18px;
+            color: var(--text-secondary);
+            margin-bottom: 28px;
+        }
+
+        .hero-img-box {
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: var(--shadow-lg);
+            border: 1px solid var(--border-soft);
+        }
+        .hero-img-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        /* Lead Magnet Cards Grid */
+        .section-leads {
+            max-width: 1200px;
+            margin: 0 auto 70px;
+            padding: 0 24px;
+        }
+        .section-heading {
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto 40px;
+        }
+        .section-heading h2 {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: 36px;
+            color: var(--brand-dark);
+            margin-bottom: 10px;
+        }
+        .leads-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 32px;
+        }
+        @media (max-width: 800px) { .leads-grid { grid-template-columns: 1fr; } }
+
+        .lead-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-soft);
+            border-radius: 20px;
+            padding: 32px;
+            box-shadow: var(--shadow-md);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .lead-card h3 {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: 24px;
+            color: var(--brand-dark);
+            margin-bottom: 12px;
+        }
+        .lead-card p {
+            font-size: 15px;
+            color: var(--text-secondary);
+            margin-bottom: 24px;
+        }
+
+        .input-text {
+            width: 100%;
+            padding: 13px 16px;
+            border: 1.5px solid var(--border-soft);
+            border-radius: 10px;
+            font-size: 15px;
+            margin-bottom: 12px;
+            outline: none;
+        }
+        .input-text:focus { border-color: var(--brand-red); }
+
+        .btn-action {
+            width: 100%;
+            padding: 15px;
+            background: var(--brand-red);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .btn-action:hover { background: var(--brand-red-hover); }
+
+        /* Calculator Widget */
+        .calc-box {
+            background: #fdfbf7;
+            border: 1px dashed var(--border-soft);
+            border-radius: 14px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        .calc-slider-group {
+            margin-bottom: 16px;
+        }
+        .calc-slider-group label {
+            display: flex;
+            justify-content: space-between;
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+        .calc-slider {
+            width: 100%;
+            height: 6px;
+            border-radius: 3px;
+            background: #e7e5e4;
+            outline: none;
+            accent-color: var(--brand-red);
+        }
+        .calc-result-box {
+            background: white;
+            padding: 12px 16px;
+            border-radius: 8px;
+            border: 1px solid var(--border-soft);
+            font-size: 14px;
+            color: var(--text-primary);
+        }
+        .calc-result-box strong { color: var(--brand-red); }
+
+        /* Gallery Showcase */
+        .section-gallery {
+            max-width: 1200px;
+            margin: 0 auto 70px;
+            padding: 0 24px;
+        }
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+        }
+        @media (max-width: 700px) { .gallery-grid { grid-template-columns: 1fr; } }
+        .gallery-item {
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+            height: 320px;
+        }
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        footer {
+            background: var(--brand-dark);
+            color: #d6d3d1;
+            padding: 40px 24px;
+            text-align: center;
+            font-size: 13px;
+            margin-top: 60px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="top-bar">
+        🍊 <strong>GUIDA ALL'ARANCIA ROSSA 2026/27:</strong> Scarica la guida gratuita sulle varietà dell'Etna e calcola il fabbisogno per la tua famiglia.
+    </div>
+
+    <header class="navbar">
+        <div>
+            <a href="#" class="brand-logo-text">ROSSO VIVO</a>
+            <span class="brand-tag">Piana di Catania • Sicilia</span>
+        </div>
+        <a href="/fakedoor" style="color: var(--brand-red); font-weight: 700; text-decoration: none; font-size: 14px;">
+            Vai al Pre-Ordine Cassetta 10kg →
+        </a>
+    </header>
+
+    <!-- Hero -->
+    <section class="hero">
+        <div>
+            <div class="badge-igp">✓ Filiera Corta Diretta dall'Agrumeto</div>
+            <h1 class="hero-title">
+                La Tradizione e la Terra <em>dell'Etna</em> nella Tua Casa.
+            </h1>
+            <p class="hero-lead">
+                Dalla Piana di Catania direttamente sulla tua tavola. Arance colte al momento dell'ordine e spedite fresche in tutta Italia. Unisciti agli oltre 500 amanti del vero frutto siciliano in lista d'attesa.
+            </p>
+            <a href="#strumenti" class="btn-action" style="display: inline-block; max-width: 280px; text-align: center; text-decoration: none;">
+                Calcola il tuo Fabbisogno ↓
+            </a>
+        </div>
+        <div class="hero-img-box">
+            <img src="/static/images/contadino_etna.jpg" alt="Raccolto arance rosse dell'Etna">
+        </div>
+    </section>
+
+    <!-- Leads and Calculator Section -->
+    <section class="section-leads" id="strumenti">
+        <div class="section-heading">
+            <h2>Due Strumenti Utili Prima del Raccolto</h2>
+            <p style="color: var(--text-secondary);">Organizza le tue forniture invernali di arance fresche con semplicità.</p>
+        </div>
+
+        <div class="leads-grid">
+            <!-- Card 1: Calculator -->
+            <div class="lead-card">
+                <div>
+                    <h3>Calcolatore Fabbisogno Familiare</h3>
+                    <p>Scopri quanti chilogrammi di arance servono alla tua famiglia per una spremuta fresca ogni mattina.</p>
+
+                    <div class="calc-box">
+                        <div class="calc-slider-group">
+                            <label>Persone in famiglia: <span id="familyCountVal" style="color: var(--brand-red);">3</span></label>
+                            <input type="range" class="calc-slider" id="familySlider" min="1" max="6" value="3" oninput="updateCalc()">
+                        </div>
+                        <div class="calc-slider-group">
+                            <label>Spremute a settimana per persona: <span id="freqVal" style="color: var(--brand-red);">5</span></label>
+                            <input type="range" class="calc-slider" id="freqSlider" min="1" max="7" value="5" oninput="updateCalc()">
+                        </div>
+                        <div class="calc-result-box" id="calcResult">
+                            Consumo stimato: <strong>12 kg / mese</strong> (Consigliata Cassetta 15kg o Abbonamento 10kg)
+                        </div>
+                    </div>
+                </div>
+
+                <form onsubmit="submitLead(event, 'Calcolatore Consumo Widget')">
+                    <input type="email" class="input-text" required placeholder="La tua email per salvare il calcolo">
+                    <button type="submit" class="btn-action">Salva & Ricevi Sconto 20%</button>
+                </form>
+            </div>
+
+            <!-- Card 2: PDF Guide -->
+            <div class="lead-card">
+                <div>
+                    <h3>Guida alle Arance Rosse di Sicilia (PDF)</h3>
+                    <p>La guida pratica su come riconoscere le varietà Tarocco, i periodi di maturazione naturale e i consigli per conservarle fresche a lungo.</p>
+
+                    <div style="background: var(--brand-red-light); border: 1px solid #fecaca; border-radius: 12px; padding: 18px; margin-bottom: 24px;">
+                        <ul style="list-style: none; font-size: 14px; color: var(--brand-dark); display: flex; flex-direction: column; gap: 8px;">
+                            <li>✓ Calendario di raccolta delle varietà: Lempso, VCR e Sant'Alfio</li>
+                            <li>✓ Perché le arance appena colte durano di più</li>
+                            <li>✓ 3 ricette tradizionali siciliane con le arance rosse</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <form onsubmit="submitLead(event, 'PDF Guida Arance Rosse')">
+                    <input type="email" class="input-text" required placeholder="Inserisci la tua email per il PDF">
+                    <button type="submit" class="btn-action">Scarica la Guida Gratis (PDF)</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Visual Gallery -->
+    <section class="section-gallery">
+        <div class="gallery-grid">
+            <div class="gallery-item">
+                <img src="/static/images/hero_tarocco.jpg" alt="Tarocco Siciliano">
+            </div>
+            <div class="gallery-item">
+                <img src="/static/images/spremuta.jpg" alt="Spremuta naturale">
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div style="font-family: 'Playfair Display', Georgia, serif; font-size: 20px; font-weight: 700; color: white; margin-bottom: 8px;">
+            ROSSO VIVO — ARANCE ROSSE DI SICILIA
+        </div>
+        <p>Piana di Catania (CT) • Zona Etna • Sicilia, Italia</p>
+        <p style="color: #a8a29e; font-size: 12px;">© 2026 Rosso Vivo. Tutti i diritti riservati.</p>
+    </footer>
+
+    <script>
+        function updateCalc() {
+            const people = parseInt(document.getElementById('familySlider').value);
+            const freq = parseInt(document.getElementById('freqSlider').value);
+            document.getElementById('familyCountVal').innerText = people;
+            document.getElementById('freqVal').innerText = freq;
+
+            const kgPerMonth = Math.round((people * freq * 4.3 * 0.25));
+            let recommendation = "Cassetta 10kg";
+            if (kgPerMonth > 14) recommendation = "Cassetta 15kg o Abbonamento Mensile";
+            else if (kgPerMonth < 8) recommendation = "Cassetta 5kg";
+
+            document.getElementById('calcResult').innerHTML = 
+                `Consumo stimato: <strong>${kgPerMonth} kg / mese</strong> (Consigliata: ${recommendation})`;
+        }
+
+        async function submitLead(e, source) {
+            e.preventDefault();
+            const input = e.target.querySelector('input[type="email"]');
+            const email = input.value;
+            const btn = e.target.querySelector('button');
+
+            btn.disabled = true;
+            btn.innerText = 'Invio in corso...';
+
+            try {
+                const res = await fetch('/api/submit_lead', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email: email, lead_source: source })
+                });
+                const data = await res.json();
+                btn.style.background = '#1d6e3f';
+                btn.innerText = '✓ Iscrizione Ricevuta!';
+                input.value = '';
+                setTimeout(() => {
+                    alert(data.message || 'Grazie per esserti iscritto!');
+                    btn.disabled = false;
+                    btn.innerText = 'Conferma';
+                    btn.style.background = '#9e1b27';
+                }, 1000);
+            } catch(err) {
+                alert('Errore di connessione.');
+                btn.disabled = false;
+                btn.innerText = 'Riprova';
+            }
+        }
+    </script>
+</body>
+</html>

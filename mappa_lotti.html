@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mappa Catasto Digitale Lotti Agrumeto 16 ha — Rosso Vivo</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+    body { display: flex; height: 100vh; overflow: hidden; background: #181818; color: #fff; }
+    #sidebar { width: 420px; background: #222; padding: 20px; overflow-y: auto; border-right: 1px solid #333; display: flex; flex-direction: column; gap: 15px; }
+    #map { flex: 1; height: 100%; }
+    h1 { font-size: 1.25rem; color: #e74c3c; margin-bottom: 4px; }
+    p { font-size: 0.85rem; color: #aaa; line-height: 1.4; }
+    .badge { display: inline-block; padding: 3px 8px; border-radius: 4px; font-size: 0.75rem; font-weight: bold; }
+    .badge-success { background: #27ae60; color: #fff; }
+    .badge-info { background: #2980b9; color: #fff; }
+    .stat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 10px; }
+    .stat-card { background: #2a2a2a; padding: 10px; border-radius: 6px; text-align: center; }
+    .stat-card .val { font-size: 1.2rem; font-weight: bold; color: #f39c12; }
+    .stat-card .lbl { font-size: 0.75rem; color: #888; }
+    .lot-card { background: #2c2c2c; padding: 12px; border-radius: 6px; border-left: 5px solid #fff; margin-top: 8px; font-size: 0.85rem; cursor: pointer; transition: 0.2s; }
+    .lot-card:hover { background: #383838; }
+    .lot-card h3 { font-size: 0.95rem; margin-bottom: 4px; color: #fff; display: flex; justify-content: space-between; }
+    .lot-card p { font-size: 0.8rem; color: #bbb; }
+  </style>
+</head>
+<body>
+
+  <div id="sidebar">
+    <div>
+      <span class="badge badge-success">✓ CATASTO DIGITALE VERIFICATO</span>
+      <h1>Agrumeto 16 ha — Il Casale Rosso</h1>
+      <p>C.da Jannarello, Ramacca (CT) | 45m slm | Georeferenziazione Completa</p>
+    </div>
+
+    <div class="stat-grid">
+      <div class="stat-card">
+        <div class="val">10.000</div>
+        <div class="lbl">Alberi Reali Censiti</div>
+      </div>
+      <div class="stat-card">
+        <div class="val">16,00 ha</div>
+        <div class="lbl">Superficie Totale</div>
+      </div>
+      <div class="stat-card">
+        <div class="val">6 Lotti</div>
+        <div class="lbl">Zonazione Coltivar</div>
+      </div>
+      <div class="stat-card">
+        <div class="val">33,2 Vagoni</div>
+        <div class="lbl">Stima Totale 2026/27</div>
+      </div>
+    </div>
+
+    <div>
+      <h3 style="font-size: 0.9rem; color: #eee; margin-bottom: 8px;">Dettaglio Lotti Riconosciuti:</h3>
+      <div id="lots-list"></div>
+    </div>
+
+    <div style="margin-top: auto; padding-top: 15px; border-top: 1px solid #333;">
+      <p style="font-size: 0.75rem; color: #888; text-align: center;">Dati sincronizzati con il database aziendale <code>rosso_vivo.db</code></p>
+    </div>
+  </div>
+
+  <div id="map"></div>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script>
+    const map = L.map('map', {
+      center: [37.4408, 14.8128],
+      zoom: 17,
+      maxZoom: 20
+    });
+
+    L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+      attribution: 'Esri World Imagery',
+      maxZoom: 20
+    }).addTo(map);
+
+    L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager_only_labels/{z}/{x}/{y}{r}.png', {
+      subdomains: 'abcd',
+      maxZoom: 20
+    }).addTo(map);
+
+    const lotsData = [
+      {
+        id: "lotto_1",
+        nome: "Lotto 1 — Tarocco Sant'Alfio 4a",
+        cultivar: "Tarocco Sant'Alfio",
+        eta: "4 anni",
+        ha: 2.45,
+        piante: 2000,
+        vagoni: "4,48 vagoni",
+        raccolta: "Aprile — Maggio",
+        colore: "#9b59b6",
+        coords: [[[14.808594,37.440138],[14.808669,37.439704],[14.812274,37.440385],[14.811416,37.441245],[14.808594,37.440138]]]
+      },
+      {
+        id: "lotto_2",
+        nome: "Lotto 2 — Tarocco Lempso 8a (Nord-Ovest)",
+        cultivar: "Tarocco Lempso",
+        eta: "8 anni",
+        ha: 1.88,
+        piante: 1500,
+        vagoni: "7,53 vagoni",
+        raccolta: "Dicembre — Gennaio",
+        colore: "#e67e22",
+        coords: [[[14.811528,37.44127],[14.812387,37.440418],[14.813787,37.440955],[14.812526,37.442142],[14.812312,37.442134],[14.81244,37.441814],[14.812,37.441648],[14.812011,37.441508],[14.811528,37.44127]]]
+      },
+      {
+        id: "lotto_3",
+        nome: "Lotto 3 — Tarocco Lempso 8a (Nord-Centro)",
+        cultivar: "Tarocco Lempso",
+        eta: "8 anni",
+        ha: 1.88,
+        piante: 1500,
+        vagoni: "7,53 vagoni",
+        raccolta: "Dicembre — Gennaio",
+        colore: "#e67e22",
+        coords: [[[14.812526,37.442142],[14.813787,37.440955],[14.815101,37.44147],[14.814876,37.442206],[14.814071,37.442151],[14.812526,37.442142]]]
+      },
+      {
+        id: "lotto_4",
+        nome: "Lotto 4 — Tarocco Rosso VCR 8a (Nord-Est)",
+        cultivar: "Tarocco Rosso VCR",
+        eta: "8 anni",
+        ha: 1.43,
+        piante: 1000,
+        vagoni: "4,81 vagoni",
+        raccolta: "Febbraio — Marzo",
+        colore: "#e74c3c",
+        coords: [[[14.814951,37.442278],[14.815044,37.441656],[14.815332,37.44167],[14.81538,37.441449],[14.815627,37.44147],[14.815718,37.441308],[14.816136,37.441738],[14.817199,37.442896],[14.816383,37.442641],[14.814951,37.442278]]]
+      },
+      {
+        id: "lotto_5",
+        nome: "Lotto 5 — Tarocco Lempso 4a (Fascia Est)",
+        cultivar: "Tarocco Lempso",
+        eta: "4 anni",
+        ha: 3.54,
+        piante: 2500,
+        vagoni: "5,60 vagoni",
+        raccolta: "Dicembre — Gennaio",
+        colore: "#f1c40f",
+        coords: [[[14.811485,37.440236],[14.811716,37.439348],[14.813958,37.439867],[14.814988,37.440463],[14.815882,37.441316],[14.815662,37.441255],[14.815401,37.441191],[14.815034,37.441382],[14.813462,37.44078],[14.812572,37.44042],[14.811856,37.440258],[14.811485,37.440236]]]
+      },
+      {
+        id: "lotto_6",
+        nome: "Lotto 6 — Tarocco Rosso VCR 4a (Fascia Sud-Ovest)",
+        cultivar: "Tarocco Rosso VCR",
+        eta: "4 anni",
+        ha: 2.50,
+        piante: 1500,
+        vagoni: "3,24 vagoni",
+        raccolta: "Febbraio — Marzo",
+        colore: "#c0392b",
+        coords: [[[14.808674,37.439644],[14.808841,37.4388],[14.811507,37.439327],[14.811703,37.439397],[14.811485,37.440236],[14.808674,37.439644]]]
+      }
+    ];
+
+    const listContainer = document.getElementById('lots-list');
+    const layersMap = {};
+
+    lotsData.forEach(l => {
+      // Invert coords for Leaflet [lat, lon]
+      const leafletCoords = l.coords[0].map(c => [c[1], c[0]]);
+      const poly = L.polygon(leafletCoords, {
+        color: l.colore,
+        fillColor: l.colore,
+        fillOpacity: 0.5,
+        weight: 2.5
+      }).addTo(map);
+
+      poly.bindPopup(`
+        <div style="font-size: 13px; line-height: 1.4;">
+          <strong style="color: ${l.colore}; font-size: 14px;">${l.nome}</strong><br>
+          <b>Cultivar:</b> ${l.cultivar} (${l.eta})<br>
+          <b>Superficie:</b> ${l.ha} ha (${l.piante.toLocaleString()} alberi)<br>
+          <b>Stima Resa:</b> ${l.vagoni}<br>
+          <b>Periodo Raccolta:</b> ${l.raccolta}
+        </div>
+      `);
+
+      layersMap[l.id] = poly;
+
+      // Sidebar card
+      const card = document.createElement('div');
+      card.className = 'lot-card';
+      card.style.borderLeftColor = l.colore;
+      card.innerHTML = `
+        <h3><span>${l.nome}</span> <span style="color:${l.colore}">${l.ha} ha</span></h3>
+        <p>🌳 <strong>${l.piante.toLocaleString()} piante</strong> | 📦 Resa: <strong>${l.vagoni}</strong></p>
+        <p style="color:#888; font-size:0.75rem; margin-top:3px;">📅 Raccolta: ${l.raccolta}</p>
+      `;
+      card.onclick = () => {
+        map.fitBounds(poly.getBounds(), { padding: [40, 40] });
+        poly.openPopup();
+      };
+      listContainer.appendChild(card);
+    });
+
+    // Punti di confine non nostro
+    L.circleMarker([37.438660, 14.812500], {
+      radius: 6,
+      fillColor: "#7f8c8d",
+      color: "#fff",
+      weight: 2,
+      fillOpacity: 0.9
+    }).addTo(map).bindPopup("<strong>Confine Sud: Terreno NON di proprietà</strong>");
+
+    map.fitBounds(L.featureGroup(Object.values(layersMap)).getBounds(), { padding: [30, 30] });
+  </script>
+</body>
+</html>
